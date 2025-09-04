@@ -1,160 +1,36 @@
-# Jogo-da-velha-
-Sofblue
+# Jogo da Velha (Implementação em Pseudocódigo) Tic-Tac-Toe Logic
 
-tipo tabuleiro {
-    caractere: m[3][3];
-}
+![Logic](https://img.shields.io/badge/Language-Pseudocode-blue.svg)
 
-tipo jogador {
-    caractere: nome;
-    caractere: simbolo;
-}
+Este repositório contém a implementação da lógica completa para um clássico Jogo da Velha, escrito em uma linguagem estruturada de pseudocódigo (similar ao Portugol). O projeto foi desenvolvido para focar puramente na lógica de programação, sendo uma excelente base de estudos para algoritmos de jogos.
 
-tipo jogada {
-    inteiro: i;
-    inteiro: j;
-}
+---
 
-início {
-    tabuleiro: t;
-    jogador: jogadores[2];
-    
-    inteiro: njog;
-    njog = 0;
-    
-    zerar(t);
-    criar_jogadores(jogadores);
-    
-    imprimir(t);
-    
-    enquanto(não tabuleiro_cheio(t) e não jogo_acabou(t)) {
-        jogada: jogada;
-        
-        jogada = aguardar_jogada(jogadores[njog]);
-        se (realizar_jogada(t, jogada, jogadores[njog])) {
-            imprimir(t);
-            njog = (njog + 1) % 2;
-        } senão {
-            escreva("Jogada inválida. Tente novamente.");
-        }
-    }
-    
-    se (jogo_acabou (t)) {
-        jogador: ganhador;
-        ganhador = jogadores[(njog + 1) % 2];
-        escreva("O jogador " + ganhador.nome + " ganhou!");
-    } senão {
-        escreva("Ninguém Venceu");
-    }
-}
+## 🎲 Lógica e Funcionalidades
 
-função tabuleiro_cheio(tabuleiro: t) -> lógico {
-    inteiro: i;
-    inteiro: j;
-    
-    para i de 0 até 2 passo 1 {
-        para j de 0 até 2 passo 1 {
-            se ( t.m[i][j] == " "){
-                retorne falso;
-            }
-        }
-    }
-    retorne verdadeiro;
-}
+O código está estruturado em funções e tipos de dados que controlam todo o fluxo do jogo, desde o início até a sua conclusão.
 
-função jogo_acabou(tabuleiro: t) -> lógico {
-    // Diagonal 1
-    se (t.m[0][0] == t.m[1][1] e t.m[0][0] == t.m[2][2] e t.m[0][0] <> " ") {
-        retorne verdadeiro;
-    }
-    // Diagonal 2
-    se (t.m[0][2] == t.m[1][1] e t.m[0][2] == t.m[2][0] e t.m[0][2] <> " ") {
-        retorne verdadeiro;
-    }
-    // Coluna 1
-    se (t.m[0][0] == t.m[1][0] e t.m[0][0] == t.m[2][0] e t.m[0][0] <> " ") {
-        retorne verdadeiro;
-    }
-    // Coluna 2
-    se (t.m[0][1] == t.m[1][1] e t.m[0][1] == t.m[2][1] e t.m[0][1] <> " ") {
-        retorne verdadeiro;
-    }
-    // Coluna 3
-    se (t.m[0][2] == t.m[1][2] e t.m[0][2] == t.m[2][2] e t.m[0][2] <> " ") {
-        retorne verdadeiro;
-    }
-    
-    // Linha 1
-    se (t.m[0][0] == t.m[0][1] e t.m[0][0] == t.m[0][2] e t.m[0][0] <> " ") {
-        retorne verdadeiro;
-    }
-    
-    // Linha 2
-    se (t.m[1][0] == t.m[1][1] e t.m[1][0] == t.m[1][2] e t.m[1][0] <> " ") {
-        retorne verdadeiro;
-    }
-    // Linha 3
-    se (t.m[2][0] == t.m[2][1] e t.m[2][0] == t.m[2][2] e t.m[2][0] <> " ") {
-        retorne verdadeiro;
-    }
-    
-    retorne falso;
-    
-}
+### Estrutura de Dados
+-   **`tabuleiro`**: Uma matriz 3x3 que representa o estado atual do jogo.
+-   **`jogador`**: Uma estrutura que armazena o nome e o símbolo ('X' ou 'O') de cada jogador.
+-   **`jogada`**: Armazena as coordenadas (linha e coluna) da jogada de um jogador.
 
-função zerar(tabuleiro: t) {
-    inteiro: i;
-    inteiro: j;
-    
-    
-    para i de 0 até 2 passo 1 {
-        para j de 0 até 2 passo 1 {
-            t.m[i][j] = " ";
-        }
-    }
-}
+### Fluxo do Jogo
+1.  **Inicialização**: O tabuleiro é zerado (preenchido com espaços vazios) e os dois jogadores ('A' com 'X' e 'B' com 'O') são criados.
+2.  **Loop Principal**: O jogo continua em um loop `enquanto` o tabuleiro não estiver cheio e não houver um vencedor.
+3.  **Alternância de Turnos**: O controle de turno alterna entre o jogador 0 e o jogador 1 a cada jogada válida.
+4.  **Validação da Jogada**: O código verifica se a posição escolhida pelo jogador já está ocupada. Se estiver, informa que a jogada é inválida e solicita uma nova.
+5.  **Verificação de Vitória**: Após cada jogada, a função `jogo_acabou` verifica todas as possíveis condições de vitória:
+    -   As 3 linhas.
+    -   As 3 colunas.
+    -   As 2 diagonais.
+6.  **Verificação de Empate**: Se o loop terminar porque o tabuleiro está cheio (`tabuleiro_cheio`) e não houve vencedor, o jogo termina em empate.
+7.  **Fim de Jogo**: Ao final, o programa anuncia o jogador vencedor ou declara que houve um empate.
 
-função imprimir(tabuleiro: t) {
-    inteiro: i;
-    
-    para i de 0 até 2 passo 1 {
-        escreval(t.m[i][0]);
-        escreval(" | ");
-        escreval(t.m[i][1]);
-        escreval(" | ");
-        escreva(t.m[i][2]);
-        
-        se (i < 2){
-            escreva("---------");
-        }
-    }
-    
-    escreva();
-    
-}
+---
 
-função criar_jogadores(jogador: jogadores[2]) {
-    jogadores[0].nome = "A";
-    jogadores[0].simbolo = "X";
-    
-    jogadores[1].nome = "B";
-    jogadores[1].simbolo = "O";
-}
+## 🔧 Como o Código Funciona
 
-função aguardar_jogada(jogador: jogador) -> jogada {
-    jogada: jogada;
-    
-    leia ("Jogador " + jogador.nome + " => Linha", jogada.i);
-    leia ("Jogador " + jogador.nome + " => Coluna", jogada.j);
-    
-    retorne jogada;
-}
+O projeto é totalmente procedural e modularizado. As principais funções são:
 
-função realizar_jogada(tabuleiro: t, jogada: jogada, jogador: jogador) -> lógico {
-    se (t.m[jogada.i][jogada.j] <> " ") {
-        retorne falso;
-    }
-    
-    t.m[jogada.i][jogada.j] = jogador.simbolo;
-    retorne verdadeiro;
-}
+-   `zerar(
