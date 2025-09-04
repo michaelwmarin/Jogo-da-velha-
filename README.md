@@ -33,4 +33,11 @@ O código está estruturado em funções e tipos de dados que controlam todo o f
 
 O projeto é totalmente procedural e modularizado. As principais funções são:
 
--   `zerar(
+-   `zerar(t)`: Limpa o tabuleiro para o início de uma nova partida.
+-   `imprimir(t)`: Exibe o estado atual do tabuleiro no console.
+-   `aguardar_jogada(jogador)`: Pede e captura as coordenadas da jogada do jogador atual.
+-   `realizar_jogada(t, jogada, jogador)`: Tenta aplicar a jogada no tabuleiro e retorna se foi bem-sucedida.
+-   `jogo_acabou(t)`: Retorna `verdadeiro` se alguma condição de vitória for atingida.
+-   `tabuleiro_cheio(t)`: Retorna `verdadeiro` se não houver mais espaços vazios.
+
+Este código é um excelente material de estudo para quem está aprendendo lógica de programação e desenvolvimento de algoritmos.
